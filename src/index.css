@@ -1,0 +1,165 @@
+:root {
+  --orange-banner: #f97316;
+  --orange-hover: #fb923c;
+  --orange-text: #ea580c;
+  --green-nav: #16a34a;
+  --green-btn: #16a34a;
+  --green-hover: #15803d;
+  --green-dark: #14532d;
+  --bg-page: #f8f8f8;
+  --white: #ffffff;
+  --footer-gray: #f1f5f9;
+  --text-default: #374151;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-soft: 0 4px 24px rgba(20, 83, 45, 0.08);
+  --font: "Nunito", system-ui, sans-serif;
+  /* Alinhado à altura real da navbar (evita faixa entre barra e banner) */
+  --navbar-height: 76px;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --navbar-height: 104px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text-default);
+  background: var(--bg-page);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+}
+
+input,
+textarea {
+  font-family: inherit;
+}
+
+.page {
+  flex: 1;
+  min-height: 0;
+  padding-top: var(--navbar-height);
+  padding-left: max(0px, env(safe-area-inset-left));
+  padding-right: max(0px, env(safe-area-inset-right));
+  padding-bottom: max(0px, env(safe-area-inset-bottom));
+}
+
+.page--flush {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Mapa: coluna flex para o PetMap repartir a altura do <main> (evita faixa vazia) */
+.page--pet-map {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.35rem;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: clamp(0.88rem, 2.5vw, 0.95rem);
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+@media (pointer: coarse) {
+  .btn {
+    min-height: 44px;
+  }
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-orange {
+  background: var(--orange-banner);
+  color: var(--white);
+}
+
+.btn-orange:hover {
+  background: var(--orange-hover);
+}
+
+.btn-green {
+  background: var(--green-btn);
+  color: var(--white);
+}
+
+.btn-green:hover {
+  background: var(--green-hover);
+}
+
+.btn-outline-green {
+  background: var(--white);
+  color: var(--green-dark);
+  border: 2px solid var(--green-btn);
+}
+
+.btn-outline-green:hover {
+  background: rgba(22, 163, 74, 0.08);
+}
+
+.leaflet-container {
+  font-family: var(--font);
+  z-index: 1;
+}

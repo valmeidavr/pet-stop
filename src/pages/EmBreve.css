@@ -1,0 +1,30 @@
+.em-breve {
+  max-width: min(560px, 100%);
+  margin: 0 auto;
+  padding: 2rem max(1rem, env(safe-area-inset-left)) 2.5rem
+    max(1rem, env(safe-area-inset-right));
+  padding-bottom: calc(2.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.em-breve__title {
+  color: var(--green-dark);
+  margin-top: 0;
+  font-size: clamp(1.35rem, 4.5vw, 1.75rem);
+  line-height: 1.2;
+}
+
+.em-breve__text {
+  color: var(--text-default);
+  line-height: 1.6;
+}
+
+.em-breve__back {
+  color: var(--green-btn);
+  font-weight: 700;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.em-breve__back:hover {
+  color: var(--green-hover);
+}

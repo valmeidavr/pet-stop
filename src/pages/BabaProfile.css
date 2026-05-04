@@ -1,0 +1,167 @@
+.baba-profile {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem max(1rem, env(safe-area-inset-left)) 3rem
+    max(1rem, env(safe-area-inset-right));
+}
+
+.baba-profile__highlight {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-start;
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 1.5rem;
+}
+
+.baba-profile__photo {
+  width: 180px;
+  height: 180px;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.baba-profile__info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.baba-profile__name {
+  margin: 0 0 0.5rem;
+  font-size: 1.65rem;
+  color: var(--green-dark);
+}
+
+.baba-profile__loc {
+  margin: 0.5rem 0 1rem;
+}
+
+.baba-profile__contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.baba-profile__section {
+  background: var(--white);
+  padding: 1.35rem 1.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 1.25rem;
+}
+
+.baba-profile__section-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+  color: var(--green-btn);
+}
+
+.baba-profile__bio {
+  margin: 0;
+  line-height: 1.65;
+}
+
+.baba-reviews {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.baba-review {
+  padding: 1rem;
+  background: var(--bg-page);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--green-btn);
+}
+
+.baba-review__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.baba-review__date {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-left: auto;
+}
+
+.baba-review__text {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.baba-profile__cta {
+  text-align: center;
+}
+
+.baba-profile__cta-text {
+  margin: 0 0 1rem;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+
+.baba-profile__cta .baba-profile__contacts {
+  justify-content: center;
+}
+
+.baba-profile__back {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: var(--orange-text);
+}
+
+@media (max-width: 560px) {
+  .baba-profile__highlight {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.25rem 1rem;
+  }
+
+  .baba-profile__photo {
+    width: min(100%, 200px);
+    aspect-ratio: 1;
+    height: auto;
+    max-height: 220px;
+    margin: 0 auto;
+  }
+
+  .baba-profile__info {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .baba-profile__name {
+    font-size: clamp(1.35rem, 5vw, 1.65rem);
+  }
+
+  .baba-profile__contacts {
+    justify-content: center;
+  }
+
+  .baba-profile__section {
+    padding: 1.15rem 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .baba-review__head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .baba-review__date {
+    margin-left: 0;
+  }
+}

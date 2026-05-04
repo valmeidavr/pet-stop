@@ -1,0 +1,136 @@
+.babas-page {
+  position: relative;
+  overflow: hidden;
+}
+
+.babas-page__decor {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+}
+
+.babas-page__decor .paw {
+  position: absolute;
+  font-size: 4rem;
+  top: 120px;
+  right: 8%;
+  transform: rotate(-15deg);
+}
+
+.babas-page__decor .paw--2 {
+  top: 380px;
+  left: 5%;
+  transform: rotate(20deg);
+}
+
+.babas-hero {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem max(1rem, env(safe-area-inset-left)) 1.25rem
+    max(1rem, env(safe-area-inset-right));
+  text-align: center;
+}
+
+.babas-hero__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.45rem, 5vw, 2rem);
+  font-weight: 800;
+  color: var(--green-dark);
+  line-height: 1.15;
+}
+
+.babas-hero__text {
+  margin: 0 0 1.25rem;
+  color: var(--text-default);
+}
+
+.babas-search__input {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: block;
+  padding: 0.85rem 1.1rem;
+  border: 2px solid #d1fae5;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  background: var(--white);
+  box-shadow: var(--shadow-soft);
+}
+
+.babas-search__input:focus {
+  outline: none;
+  border-color: var(--green-btn);
+}
+
+@media (max-width: 480px) {
+  .babas-search__input {
+    font-size: 16px; /* evita zoom no iOS ao focar */
+  }
+}
+
+.babas-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem max(1rem, env(safe-area-inset-left)) 2.5rem
+    max(1rem, env(safe-area-inset-right));
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(min(100%, 240px), 1fr)
+  );
+  gap: 1.5rem;
+}
+
+.baba-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid #ecfdf5;
+  display: flex;
+  flex-direction: column;
+}
+
+.baba-card__photo {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.baba-card__body {
+  padding: 1.1rem 1.2rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+.baba-card__name {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--green-dark);
+}
+
+.baba-card__meta {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.baba-card__loc {
+  margin: 0.25rem 0 0.75rem;
+  font-size: 0.9rem;
+}
+
+.baba-card__btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.babas-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  color: #64748b;
+}

@@ -1,0 +1,22 @@
+.ad-slot {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 max(1rem, env(safe-area-inset-left)) 0
+    max(1rem, env(safe-area-inset-right));
+}
+
+.ad-slot__text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(72px, 15vw, 90px);
+  padding: 0.75rem max(0.75rem, env(safe-area-inset-left)) 0.75rem
+    max(0.75rem, env(safe-area-inset-right));
+  text-align: center;
+  font-size: clamp(0.85rem, 2.8vw, 0.95rem);
+  background: linear-gradient(135deg, #e2e8f0 0%, #f1f5f9 100%);
+  border: 2px dashed #cbd5e1;
+  border-radius: var(--radius-lg);
+  color: #64748b;
+  font-weight: 600;
+}
