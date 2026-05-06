@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { BrandLogo } from "./BrandLogo";
 import "./Footer.css";
 
@@ -54,7 +54,7 @@ export function Footer() {
   return (
     <footer className="footer">
       <div className="footer__inner">
-        <Link to="/" className="footer__brand">
+        <Link href="/" className="footer__brand">
           <BrandLogo className="footer__logo-img" />
         </Link>
         <div className="footer__contacts">
