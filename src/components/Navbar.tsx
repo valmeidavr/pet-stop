@@ -1,18 +1,21 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BrandLogo } from "./BrandLogo";
 import "./Navbar.css";
 
-const linkClass = ({ isActive }: { isActive: boolean }) =>
+const linkClass = (isActive: boolean) =>
   `navbar__link${isActive ? " navbar__link--active" : ""}`;
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
     setMenuOpen(false);
-  }, [location.pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -26,7 +29,7 @@ export function Navbar() {
   return (
     <header className="navbar">
       <div className="navbar__inner">
-        <Link to="/" className="navbar__logo">
+        <Link href="/" className="navbar__logo">
           <BrandLogo className="navbar__brand-img" />
         </Link>
         <button
@@ -48,20 +51,29 @@ export function Navbar() {
           className={`navbar__links${menuOpen ? " navbar__links--open" : ""}`}
           aria-label="Principal"
         >
-          <NavLink to="/" end className={linkClass}>
+          <Link href="/" className={linkClass(pathname === "/")}>
             Home
-          </NavLink>
-          <NavLink to="/paradas-pets" className={linkClass}>
+          </Link>
+          <Link
+            href="/paradas-pets"
+            className={linkClass(pathname?.startsWith("/paradas-pets") ?? false)}
+          >
             Paradas Pets
-          </NavLink>
-          <NavLink to="/emergencia" className={linkClass}>
+          </Link>
+          <Link
+            href="/emergencia"
+            className={linkClass(pathname?.startsWith("/emergencia") ?? false)}
+          >
             Atendimento Emergencial
-          </NavLink>
-          <NavLink to="/babas" className={linkClass}>
+          </Link>
+          <Link
+            href="/babas"
+            className={linkClass(pathname?.startsWith("/babas") ?? false)}
+          >
             Babás
-          </NavLink>
+          </Link>
         </nav>
-        <Link to="/login" className="btn btn-orange navbar__cta">
+        <Link href="/login" className="btn btn-orange navbar__cta">
           Entrar
         </Link>
       </div>
