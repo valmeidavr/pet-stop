@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git rm *)",
+      "Bash(mkdir -p \"/home/vinicius/Pet-Stop/Pet-Stop/src/app/babas/[id]\")",
+      "Bash(mkdir -p \"/home/vinicius/Pet-Stop/Pet-Stop/src/app/estabelecimento/[id]\")",
+      "Bash(mv /home/vinicius/Pet-Stop/Pet-Stop/src/pages/BabaProfile.css \"/home/vinicius/Pet-Stop/Pet-Stop/src/app/babas/[id]/profile.css\")",
+      "Bash(mv /home/vinicius/Pet-Stop/Pet-Stop/src/pages/EstablishmentProfile.css \"/home/vinicius/Pet-Stop/Pet-Stop/src/app/estabelecimento/[id]/profile.css\")",
+      "Bash(git -C /home/vinicius/Pet-Stop/Pet-Stop status)",
+      "Bash(git -C /home/vinicius/Pet-Stop/Pet-Stop add src/pages/BabaProfile.css src/pages/BabaProfile.tsx src/pages/Babas.css src/pages/Babas.tsx src/pages/EstablishmentProfile.css src/pages/EstablishmentProfile.tsx src/app/babas src/app/estabelecimento)",
+      "Bash(git -C /home/vinicius/Pet-Stop/Pet-Stop commit -m \"feat: migrate baba and establishment profile pages\")",
+      "Bash(git -C /home/vinicius/Pet-Stop/Pet-Stop rev-parse HEAD)",
+      "Bash(git reset *)",
+      "Bash(vercel --version)",
+      "Bash(vercel whoami *)",
+      "Bash(vercel --prod --yes)",
+      "Bash(tee /tmp/vercel-deploy.log)",
+      "Bash(vercel --prod --yes --name pet-stop)",
+      "Bash(git config *)",
+      "Bash(gh auth *)"
+    ]
+  }
+}

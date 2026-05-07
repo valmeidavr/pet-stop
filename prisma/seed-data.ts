@@ -451,13 +451,3 @@ export const babas: Baba[] = [
   },
 ];
 
-export function getEstablishment(id: string): Establishment | undefined {
-  return establishments.find((e) => e.id === id);
-}
-
-export function getBaba(id: string): Baba | undefined {
-  return babas.find((b) => b.id === id);
-}
-
-/** Centro aproximado entre Barra Mansa, Volta Redonda, Pinheiral e Quatis. */
-export const defaultMapCenter: [number, number] = [-22.41, -44.12];
