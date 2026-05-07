@@ -1,22 +1,22 @@
-import { useState, type ReactNode } from "react";
-import { Link, useParams } from "react-router-dom";
-import { StarRating } from "../components/StarRating";
-import { getEstablishment } from "../data/mock";
-import type { Establishment } from "../data/mock";
-import "./EstablishmentProfile.css";
+'use client'
 
-type Tab = "sobre" | "servicos" | "galeria" | "depoimentos";
+import { useState, type ReactNode } from 'react'
+import Link from 'next/link'
+import { StarRating } from '@/components/StarRating'
+import type { Establishment } from '@/data/mock'
+
+type Tab = 'sobre' | 'servicos' | 'galeria' | 'depoimentos'
 
 function ServiceAccordion({
   title,
   children,
 }: {
-  title: string;
-  children: ReactNode;
+  title: string
+  children: ReactNode
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   return (
-    <div className={`est-accordion${open ? " est-accordion--open" : ""}`}>
+    <div className={`est-accordion${open ? ' est-accordion--open' : ''}`}>
       <button
         type="button"
         className="est-accordion__head"
@@ -25,17 +25,17 @@ function ServiceAccordion({
       >
         {title}
         <span className="est-accordion__chev" aria-hidden>
-          {open ? "−" : "+"}
+          {open ? '−' : '+'}
         </span>
       </button>
       {open && <div className="est-accordion__body">{children}</div>}
     </div>
-  );
+  )
 }
 
 function ServicosTab({ est }: { est: Establishment }) {
   const isClinic =
-    est.type === "clinica" || est.type === "hospital" || est.type === "farmacia";
+    est.type === 'clinica' || est.type === 'hospital' || est.type === 'farmacia'
 
   if (isClinic) {
     return (
@@ -89,7 +89,7 @@ function ServicosTab({ est }: { est: Establishment }) {
           </ServiceAccordion>
         )}
       </div>
-    );
+    )
   }
 
   return (
@@ -116,40 +116,29 @@ function ServicosTab({ est }: { est: Establishment }) {
         </ServiceAccordion>
       )}
     </div>
-  );
+  )
 }
 
-export function EstablishmentProfile() {
-  const { id } = useParams<{ id: string }>();
-  const est = id ? getEstablishment(id) : undefined;
-  const [tab, setTab] = useState<Tab>("sobre");
-
-  if (!est) {
-    return (
-      <main className="page est-page">
-        <p>Estabelecimento não encontrado.</p>
-        <Link to="/paradas-pets">Ver mapa</Link>
-      </main>
-    );
-  }
+export default function EstablishmentProfileView({ est }: { est: Establishment }) {
+  const [tab, setTab] = useState<Tab>('sobre')
 
   const typeLabel =
-    est.type === "clinica"
-      ? "Clínica veterinária"
-      : est.type === "hospital"
-        ? "Hospital veterinário"
-        : est.type === "farmacia"
-          ? "Farmácia pet"
-          : est.type === "banho_tosa"
-            ? "Banho e tosa"
-            : "Loja / pet shop";
+    est.type === 'clinica'
+      ? 'Clínica veterinária'
+      : est.type === 'hospital'
+        ? 'Hospital veterinário'
+        : est.type === 'farmacia'
+          ? 'Farmácia pet'
+          : est.type === 'banho_tosa'
+            ? 'Banho e tosa'
+            : 'Loja / pet shop'
 
   const subTitle =
-    est.type === "clinica" || est.type === "hospital"
-      ? est.publicPrivate === "publico"
-        ? "Público"
-        : "Privado"
-      : null;
+    est.type === 'clinica' || est.type === 'hospital'
+      ? est.publicPrivate === 'publico'
+        ? 'Público'
+        : 'Privado'
+      : null
 
   return (
     <main className="page est-page">
@@ -181,16 +170,16 @@ export function EstablishmentProfile() {
       <div className="est-tabs">
         {(
           [
-            ["sobre", "Sobre"],
-            ["servicos", "Serviços"],
-            ["galeria", "Galeria"],
-            ["depoimentos", "Depoimentos"],
+            ['sobre', 'Sobre'],
+            ['servicos', 'Serviços'],
+            ['galeria', 'Galeria'],
+            ['depoimentos', 'Depoimentos'],
           ] as const
         ).map(([key, label]) => (
           <button
             key={key}
             type="button"
-            className={`est-tabs__btn${tab === key ? " est-tabs__btn--active" : ""}`}
+            className={`est-tabs__btn${tab === key ? ' est-tabs__btn--active' : ''}`}
             onClick={() => setTab(key)}
           >
             {label}
@@ -199,7 +188,7 @@ export function EstablishmentProfile() {
       </div>
 
       <div className="est-tab-content">
-        {tab === "sobre" && (
+        {tab === 'sobre' && (
           <section className="est-tab-panel">
             <h2 className="est-tab-panel__title est-tab-panel__title--lg">
               Sobre nós
@@ -208,9 +197,9 @@ export function EstablishmentProfile() {
           </section>
         )}
 
-        {tab === "servicos" && <ServicosTab est={est} />}
+        {tab === 'servicos' && <ServicosTab est={est} />}
 
-        {tab === "galeria" && (
+        {tab === 'galeria' && (
           <section className="est-tab-panel">
             <h2 className="est-tab-panel__title">Galeria</h2>
             {est.galleryImages.length > 0 ? (
@@ -225,7 +214,7 @@ export function EstablishmentProfile() {
           </section>
         )}
 
-        {tab === "depoimentos" && (
+        {tab === 'depoimentos' && (
           <section className="est-tab-panel">
             <h2 className="est-tab-panel__title">Depoimentos</h2>
             {est.testimonials.length > 0 ? (
@@ -248,9 +237,9 @@ export function EstablishmentProfile() {
         )}
       </div>
 
-      <Link to="/paradas-pets" className="est-back">
+      <Link href="/paradas-pets" className="est-back">
         ← Voltar ao mapa
       </Link>
     </main>
-  );
+  )
 }

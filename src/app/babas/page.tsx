@@ -1,21 +1,23 @@
-import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
-import { StarRating } from "../components/StarRating";
-import { babas } from "../data/mock";
-import "./Babas.css";
+'use client'
 
-export function Babas() {
-  const [q, setQ] = useState("");
+import { useMemo, useState } from 'react'
+import Link from 'next/link'
+import { StarRating } from '@/components/StarRating'
+import { babas } from '@/data/mock'
+import './babas.css'
+
+export default function BabasPage() {
+  const [q, setQ] = useState('')
 
   const filtered = useMemo(() => {
-    const t = q.trim().toLowerCase();
-    if (!t) return babas;
+    const t = q.trim().toLowerCase()
+    if (!t) return babas
     return babas.filter(
       (b) =>
         b.name.toLowerCase().includes(t) ||
         b.location.toLowerCase().includes(t),
-    );
-  }, [q]);
+    )
+  }, [q])
 
   return (
     <main className="page babas-page">
@@ -53,7 +55,7 @@ export function Babas() {
               <p className="baba-card__meta">{b.reviewCount} avaliações</p>
               <p className="baba-card__loc">📍 {b.location}</p>
               <Link
-                to={`/babas/${b.id}`}
+                href={`/babas/${b.id}`}
                 className="btn btn-green baba-card__btn"
               >
                 Ver perfil
@@ -66,5 +68,5 @@ export function Babas() {
         )}
       </section>
     </main>
-  );
+  )
 }

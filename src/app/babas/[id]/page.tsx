@@ -1,20 +1,17 @@
-import { Link, useParams } from "react-router-dom";
-import { StarRating } from "../components/StarRating";
-import { getBaba } from "../data/mock";
-import "./BabaProfile.css";
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import { StarRating } from '@/components/StarRating'
+import { getBaba } from '@/data/mock'
+import './profile.css'
 
-export function BabaProfile() {
-  const { id } = useParams<{ id: string }>();
-  const baba = id ? getBaba(id) : undefined;
-
-  if (!baba) {
-    return (
-      <main className="page baba-profile">
-        <p>Babá não encontrada.</p>
-        <Link to="/babas">Voltar à listagem</Link>
-      </main>
-    );
-  }
+export default async function BabaProfilePage({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = await params
+  const baba = getBaba(id)
+  if (!baba) notFound()
 
   return (
     <main className="page baba-profile">
@@ -72,9 +69,9 @@ export function BabaProfile() {
         </div>
       </section>
 
-      <Link to="/babas" className="baba-profile__back">
+      <Link href="/babas" className="baba-profile__back">
         ← Voltar para babás
       </Link>
     </main>
-  );
+  )
 }
