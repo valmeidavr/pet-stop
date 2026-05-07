@@ -15,13 +15,11 @@ import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import "leaflet/dist/leaflet.css";
-import {
-  defaultMapCenter,
-  establishments,
-  type Establishment,
-  type EstablishmentType,
-} from "@/data/mock";
+import type { EstablishmentType } from "@prisma/client";
+import type { EstablishmentWithRelations } from "@/lib/queries/establishments";
 import "./PetMap.css";
+
+type Establishment = EstablishmentWithRelations;
 
 const DefaultIcon = L.icon({
   iconUrl: markerIcon.src,
@@ -74,7 +72,10 @@ const PARADAS_FILTER_ORDER: EstablishmentType[] = [
   "hospital",
 ];
 
-function initialFilter(emergencyMode: boolean): Set<EstablishmentType> {
+function initialFilter(
+  emergencyMode: boolean,
+  establishments: Establishment[],
+): Set<EstablishmentType> {
   if (emergencyMode) {
     const types = (["clinica", "hospital"] as const).filter((t) =>
       establishments.some((e) => e.type === t),
@@ -127,14 +128,20 @@ function messageForGeoError(code: number | undefined): string {
 
 type Props = {
   emergencyMode?: boolean;
+  establishments: Establishment[];
+  defaultMapCenter: [number, number];
 };
 
-export function PetMap({ emergencyMode = false }: Props) {
+export function PetMap({
+  emergencyMode = false,
+  establishments,
+  defaultMapCenter,
+}: Props) {
   const [userPos, setUserPos] = useState<[number, number] | null>(null);
   const [geoStatus, setGeoStatus] = useState<string>("");
   const [geoLoading, setGeoLoading] = useState(true);
   const [filter, setFilter] = useState<Set<EstablishmentType>>(() =>
-    initialFilter(emergencyMode),
+    initialFilter(emergencyMode, establishments),
   );
   const [selected, setSelected] = useState<Establishment | null>(null);
 
@@ -214,11 +221,11 @@ export function PetMap({ emergencyMode = false }: Props) {
     const present = new Set<EstablishmentType>();
     for (const e of establishments) present.add(e.type);
     return PARADAS_FILTER_ORDER.filter((t) => present.has(t));
-  }, []);
+  }, [establishments]);
 
   const visible = useMemo(
     () => establishments.filter((e) => filter.has(e.type)),
-    [filter],
+    [filter, establishments],
   );
 
   const establishmentIcons = useMemo(() => {
@@ -227,7 +234,7 @@ export function PetMap({ emergencyMode = false }: Props) {
       m.set(est.id, createEstablishmentIcon(est));
     }
     return m;
-  }, []);
+  }, [establishments]);
 
   const nearestEmergency = useMemo(() => {
     if (!emergencyMode || !userPos) return null;
@@ -244,7 +251,7 @@ export function PetMap({ emergencyMode = false }: Props) {
       }
     }
     return best ? { place: best, km: bestD } : null;
-  }, [emergencyMode, userPos]);
+  }, [emergencyMode, userPos, establishments]);
 
   const routeLine = useMemo(() => {
     if (!emergencyMode || !userPos || !nearestEmergency) return null;
@@ -496,7 +503,7 @@ export function PetMap({ emergencyMode = false }: Props) {
             )}
 
             <Link
-              href={`/estabelecimento/${selected.id}`}
+              href={`/estabelecimento/${selected.slug}`}
               className="btn btn-green pet-map__more"
             >
               Saiba mais

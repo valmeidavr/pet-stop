@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { StarRating } from '@/components/StarRating'
-import { getBaba } from '@/data/mock'
+import { getBabaBySlug } from '@/lib/queries/babas'
 import './profile.css'
+
+const dateFmt = new Intl.DateTimeFormat('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' })
 
 export default async function BabaProfilePage({
   params,
@@ -10,7 +12,7 @@ export default async function BabaProfilePage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const baba = getBaba(id)
+  const baba = await getBabaBySlug(id)
   if (!baba) notFound()
 
   return (
@@ -45,11 +47,11 @@ export default async function BabaProfilePage({
         <h2 className="baba-profile__section-title">Avaliações</h2>
         <ul className="baba-reviews">
           {baba.reviews.map((r) => (
-            <li key={`${r.author}-${r.date}`} className="baba-review">
+            <li key={r.id} className="baba-review">
               <div className="baba-review__head">
-                <strong>{r.author}</strong>
+                <strong>{r.authorName ?? 'Anônimo'}</strong>
                 <StarRating value={r.rating} showNumber={false} size="sm" />
-                <span className="baba-review__date">{r.date}</span>
+                <span className="baba-review__date">{dateFmt.format(r.createdAt)}</span>
               </div>
               <p className="baba-review__text">{r.text}</p>
             </li>

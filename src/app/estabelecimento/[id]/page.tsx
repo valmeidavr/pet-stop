@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { getEstablishment } from '@/data/mock'
+import { getEstablishmentBySlug } from '@/lib/queries/establishments'
 import EstablishmentProfileView from './EstablishmentProfileView'
 import './profile.css'
 
@@ -9,7 +9,7 @@ export default async function EstablishmentProfilePage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const est = getEstablishment(id)
+  const est = await getEstablishmentBySlug(id)
   if (!est) notFound()
 
   return <EstablishmentProfileView est={est} />

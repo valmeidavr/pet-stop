@@ -3,9 +3,12 @@
 import { useState, type ReactNode } from 'react'
 import Link from 'next/link'
 import { StarRating } from '@/components/StarRating'
-import type { Establishment } from '@/data/mock'
+import type { EstablishmentWithRelations } from '@/lib/queries/establishments'
 
+type Establishment = EstablishmentWithRelations
 type Tab = 'sobre' | 'servicos' | 'galeria' | 'depoimentos'
+
+const dateFmt = new Intl.DateTimeFormat('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' })
 
 function ServiceAccordion({
   title,
@@ -217,14 +220,14 @@ export default function EstablishmentProfileView({ est }: { est: Establishment }
         {tab === 'depoimentos' && (
           <section className="est-tab-panel">
             <h2 className="est-tab-panel__title">Depoimentos</h2>
-            {est.testimonials.length > 0 ? (
+            {est.reviews.length > 0 ? (
               <ul className="est-testimonials">
-                {est.testimonials.map((t) => (
-                  <li key={`${t.author}-${t.date}`} className="est-testimonial">
+                {est.reviews.map((t) => (
+                  <li key={t.id} className="est-testimonial">
                     <div className="est-testimonial__head">
-                      <strong>{t.author}</strong>
+                      <strong>{t.authorName ?? 'Anônimo'}</strong>
                       <StarRating value={t.rating} size="sm" />
-                      <span className="est-testimonial__date">{t.date}</span>
+                      <span className="est-testimonial__date">{dateFmt.format(t.createdAt)}</span>
                     </div>
                     <p>{t.text}</p>
                   </li>
