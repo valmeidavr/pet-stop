@@ -1,3 +1,5 @@
+'use client'
+
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   MapContainer,
@@ -8,7 +10,7 @@ import {
   useMap,
 } from "react-leaflet";
 import L from "leaflet";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
@@ -18,13 +20,13 @@ import {
   establishments,
   type Establishment,
   type EstablishmentType,
-} from "../data/mock";
+} from "@/data/mock";
 import "./PetMap.css";
 
 const DefaultIcon = L.icon({
-  iconUrl: markerIcon,
-  iconRetinaUrl: markerIcon2x,
-  shadowUrl: markerShadow,
+  iconUrl: markerIcon.src,
+  iconRetinaUrl: markerIcon2x.src,
+  shadowUrl: markerShadow.src,
   iconSize: [25, 41],
   iconAnchor: [12, 41],
 });
@@ -494,7 +496,7 @@ export function PetMap({ emergencyMode = false }: Props) {
             )}
 
             <Link
-              to={`/estabelecimento/${selected.id}`}
+              href={`/estabelecimento/${selected.id}`}
               className="btn btn-green pet-map__more"
             >
               Saiba mais
