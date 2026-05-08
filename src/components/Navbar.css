@@ -1,8 +1,5 @@
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
   z-index: 1000;
   background-color: var(--green-nav);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);

@@ -32,7 +32,7 @@ export default function Home() {
                     href="/cadastro"
                     className="btn btn-green hero__cta"
                   >
-                    cadastrar
+                    Cadastrar
                   </Link>
                 </div>
               </div>

@@ -6,6 +6,12 @@ import './profile.css'
 
 const dateFmt = new Intl.DateTimeFormat('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' })
 
+function whatsappLink(phone: string): string {
+  const digits = phone.replace(/\D/g, '')
+  const withCountry = digits.startsWith('55') ? digits : `55${digits}`
+  return `https://wa.me/${withCountry}`
+}
+
 export default async function BabaProfilePage({
   params,
 }: {
@@ -62,8 +68,13 @@ export default async function BabaProfilePage({
       <section className="baba-profile__section baba-profile__cta">
         <p className="baba-profile__cta-text">Quer conversar com {baba.name}?</p>
         <div className="baba-profile__contacts">
-          <a href={`tel:${baba.phone}`} className="btn btn-orange">
-            Ligar agora
+          <a
+            href={whatsappLink(baba.phone)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-green"
+          >
+            💬 WhatsApp
           </a>
           <a href={`mailto:${baba.email}`} className="btn btn-outline-green">
             Enviar e-mail

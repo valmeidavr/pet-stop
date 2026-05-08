@@ -90,7 +90,6 @@ textarea {
 .page {
   flex: 1;
   min-height: 0;
-  padding-top: var(--navbar-height);
   padding-left: max(0px, env(safe-area-inset-left));
   padding-right: max(0px, env(safe-area-inset-right));
   padding-bottom: max(0px, env(safe-area-inset-bottom));
