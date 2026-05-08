@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 import { establishments, babas } from './seed-data'
+import { adoptables, campaigns, buscaPetPosts } from './seed-data-extras'
 
 const prisma = new PrismaClient()
 
@@ -92,6 +93,30 @@ async function main() {
         email: b.email,
         bio: b.bio,
       },
+    })
+  }
+
+  for (const a of adoptables) {
+    await prisma.adoptable.upsert({
+      where: { slug: a.slug },
+      create: a,
+      update: { ...a },
+    })
+  }
+
+  for (const c of campaigns) {
+    await prisma.campaign.upsert({
+      where: { slug: c.slug },
+      create: c,
+      update: { ...c },
+    })
+  }
+
+  for (const p of buscaPetPosts) {
+    await prisma.buscaPetPost.upsert({
+      where: { slug: p.slug },
+      create: p,
+      update: { ...p },
     })
   }
 
