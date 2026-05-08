@@ -2,15 +2,10 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { StarRating } from '@/components/StarRating'
 import { getBabaBySlug } from '@/lib/queries/babas'
+import { whatsappLink } from '@/lib/whatsapp'
 import './profile.css'
 
 const dateFmt = new Intl.DateTimeFormat('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' })
-
-function whatsappLink(phone: string): string {
-  const digits = phone.replace(/\D/g, '')
-  const withCountry = digits.startsWith('55') ? digits : `55${digits}`
-  return `https://wa.me/${withCountry}`
-}
 
 export default async function BabaProfilePage({
   params,
