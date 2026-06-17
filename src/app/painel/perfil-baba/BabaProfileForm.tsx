@@ -4,13 +4,14 @@ import { useActionState } from 'react'
 import type { Baba } from '@prisma/client'
 import { saveBabaProfile, type BabaProfileState } from './actions'
 import { CepAddressFields } from '@/components/CepAddressFields'
+import { PhotoUpload } from '@/components/PhotoUpload'
 
 export function BabaProfileForm({ baba }: { baba: Baba | null }) {
   const [state, formAction, pending] = useActionState<BabaProfileState, FormData>(saveBabaProfile, {})
 
   return (
     <form className="auth-form" action={formAction}>
-      <input type="hidden" name="photo" defaultValue={baba?.photo ?? ''} />
+      <PhotoUpload name="photo" defaultUrl={baba?.photo ?? ''} />
 
       <label className="auth-label">
         Nome
