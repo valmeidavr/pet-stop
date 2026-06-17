@@ -104,3 +104,41 @@
   padding: 0.5rem 0.75rem;
   font-size: 0.9rem;
 }
+
+.auth-roles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.auth-role {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.auth-strength {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.auth-strength__bar {
+  height: 6px;
+  flex: 1;
+  border-radius: 999px;
+  background: #e5e7eb;
+  transition: background 0.2s, width 0.2s;
+}
+.auth-strength__bar--0 { background: #dc2626; }
+.auth-strength__bar--1 { background: #f97316; }
+.auth-strength__bar--2 { background: #eab308; }
+.auth-strength__bar--3 { background: #22c55e; }
+.auth-strength__bar--4 { background: #16a34a; }
+.auth-strength__label {
+  font-size: 0.8rem;
+  color: #6b7280;
+  white-space: nowrap;
+}
