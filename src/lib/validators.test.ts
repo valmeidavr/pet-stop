@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { registerSchema, loginSchema, babaProfileSchema } from './validators'
+import { registerSchema, loginSchema, babaProfileSchema, establishmentProfileSchema } from './validators'
 
 describe('registerSchema', () => {
   const base = {
@@ -101,5 +101,28 @@ describe('babaProfileSchema', () => {
   })
   it('rejeita sem cidade', () => {
     expect(babaProfileSchema.safeParse({ ...base, cidade: '' }).success).toBe(false)
+  })
+})
+
+describe('establishmentProfileSchema', () => {
+  const base = {
+    name: 'Clínica X', phone: '2433330000', email: 'c@x.com',
+    openingHours: 'Seg a Sex 8h-18h',
+    cep: '27330000', logradouro: 'Av B', numero: '50', complemento: '',
+    bairro: 'Centro', cidade: 'Barra Mansa', estado: 'RJ',
+    types: ['clinica', 'loja'], services: ['Vacinação', 'Banho'],
+    lat: -22.5, lng: -44.1, photo: '',
+  }
+  it('aceita perfil válido', () => {
+    expect(establishmentProfileSchema.safeParse(base).success).toBe(true)
+  })
+  it('rejeita sem nenhum tipo', () => {
+    expect(establishmentProfileSchema.safeParse({ ...base, types: [] }).success).toBe(false)
+  })
+  it('rejeita tipo inválido', () => {
+    expect(establishmentProfileSchema.safeParse({ ...base, types: ['xpto'] }).success).toBe(false)
+  })
+  it('aceita services vazio', () => {
+    expect(establishmentProfileSchema.safeParse({ ...base, services: [] }).success).toBe(true)
   })
 })

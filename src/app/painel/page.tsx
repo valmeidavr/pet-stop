@@ -16,7 +16,9 @@ export default async function PainelPage() {
         </Link>
       )}
       {user.role === 'ESTABLISHMENT_OWNER' && (
-        <p className="painel__hint">A edição do perfil de estabelecimento chega em breve.</p>
+        <Link href="/painel/perfil-estabelecimento" className="btn btn-green">
+          Editar meu estabelecimento
+        </Link>
       )}
       {user.role === 'CUSTOMER' && (
         <p className="painel__hint">Sua conta é de usuário comum.</p>

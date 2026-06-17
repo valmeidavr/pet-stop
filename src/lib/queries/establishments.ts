@@ -26,3 +26,7 @@ export async function getEstablishmentBySlug(slug: string) {
     include: fullInclude,
   })
 }
+
+export async function getEstablishmentByOwner(ownerId: string) {
+  return prisma.establishment.findFirst({ where: { ownerId } })
+}
