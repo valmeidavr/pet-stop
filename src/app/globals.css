@@ -14,6 +14,13 @@
   --radius-md: 12px;
   --radius-sm: 8px;
   --shadow-soft: 0 4px 24px rgba(20, 83, 45, 0.08);
+  /* Profundidade em camadas (sensação tátil/clay), tema pet */
+  --shadow-sm: 0 1px 2px rgba(20, 83, 45, 0.06), 0 1px 3px rgba(20, 83, 45, 0.05);
+  --shadow-md: 0 4px 10px rgba(20, 83, 45, 0.07), 0 2px 4px rgba(20, 83, 45, 0.05);
+  --shadow-lg: 0 12px 28px rgba(20, 83, 45, 0.1), 0 6px 12px rgba(20, 83, 45, 0.06);
+  --shadow-btn: 0 2px 6px rgba(22, 163, 74, 0.22);
+  --shadow-btn-orange: 0 2px 6px rgba(249, 115, 22, 0.25);
+  --ring: 0 0 0 3px rgba(22, 163, 74, 0.35);
   --font: "Nunito", system-ui, sans-serif;
   /* Alinhado à altura real da navbar (evita faixa entre barra e banner) */
   --navbar-height: 76px;
@@ -71,6 +78,28 @@ a {
   text-decoration: none;
 }
 
+/* Foco visível e consistente em toda navegação por teclado (acessibilidade) */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: var(--radius-sm);
+}
+
+::selection {
+  background: rgba(249, 115, 22, 0.25);
+}
+
+/* Ritmo tipográfico dos títulos sem alterar margens das páginas */
+h1, h2, h3, h4 {
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -83,8 +112,18 @@ button {
 }
 
 input,
-textarea {
+textarea,
+select {
   font-family: inherit;
+}
+
+/* Foco suave nos campos de formulário em todas as páginas */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+  border-color: var(--green-btn);
+  box-shadow: var(--ring);
 }
 
 .page {
@@ -117,7 +156,9 @@ textarea {
   border-radius: var(--radius-md);
   font-weight: 700;
   font-size: clamp(0.88rem, 2.5vw, 0.95rem);
-  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s,
+    box-shadow 0.2s;
 }
 
 @media (pointer: coarse) {
@@ -126,13 +167,25 @@ textarea {
   }
 }
 
+.btn:hover {
+  transform: translateY(-1px);
+}
+
 .btn:active {
-  transform: scale(0.98);
+  transform: translateY(0) scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .btn-orange {
   background: var(--orange-banner);
   color: var(--white);
+  box-shadow: var(--shadow-btn-orange);
 }
 
 .btn-orange:hover {
@@ -142,6 +195,7 @@ textarea {
 .btn-green {
   background: var(--green-btn);
   color: var(--white);
+  box-shadow: var(--shadow-btn);
 }
 
 .btn-green:hover {
@@ -161,4 +215,16 @@ textarea {
 .leaflet-container {
   font-family: var(--font);
   z-index: 1;
+}
+
+/* Respeita quem prefere menos animação (acessibilidade) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
