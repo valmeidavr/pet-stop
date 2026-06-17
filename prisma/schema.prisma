@@ -83,6 +83,7 @@ model Establishment {
   id            String            @id @default(cuid())
   slug          String            @unique
   type          EstablishmentType
+  types         EstablishmentType[] @default([])
   name          String
   lat           Float
   lng           Float
@@ -94,6 +95,16 @@ model Establishment {
   logoImage     String
   publicPrivate PublicPrivate?
   about         String
+
+  cep          String   @default("")
+  logradouro   String   @default("")
+  numero       String   @default("")
+  complemento  String   @default("")
+  bairro       String   @default("")
+  cidade       String   @default("")
+  estado       String   @default("")
+  openingHours String   @default("")
+  services     String[] @default([])
 
   ownerId String?
   owner   User?   @relation("EstablishmentOwner", fields: [ownerId], references: [id], onDelete: SetNull)
