@@ -84,11 +84,11 @@ function initialFilter(
 ): Set<EstablishmentType> {
   if (emergencyMode) {
     const types = (["clinica", "hospital"] as const).filter((t) =>
-      establishments.some((e) => e.type === t),
+      establishments.some((e) => e.types.includes(t)),
     );
     return new Set(types);
   }
-  return new Set(establishments.map((e) => e.type));
+  return new Set(establishments.flatMap((e) => e.types));
 }
 
 function distanceKm(
@@ -225,12 +225,12 @@ export function PetMap({
 
   const filterableTypes = useMemo(() => {
     const present = new Set<EstablishmentType>();
-    for (const e of establishments) present.add(e.type);
+    for (const e of establishments) for (const t of e.types) present.add(t);
     return PARADAS_FILTER_ORDER.filter((t) => present.has(t));
   }, [establishments]);
 
   const visible = useMemo(
-    () => establishments.filter((e) => filter.has(e.type)),
+    () => establishments.filter((e) => e.types.some((t) => filter.has(t))),
     [filter, establishments],
   );
 
@@ -245,7 +245,7 @@ export function PetMap({
   const nearestEmergency = useMemo(() => {
     if (!emergencyMode || !userPos) return null;
     const pool = establishments.filter(
-      (e) => e.type === "clinica" || e.type === "hospital",
+      (e) => e.types.includes("clinica") || e.types.includes("hospital"),
     );
     let best: Establishment | null = null;
     let bestD = Infinity;

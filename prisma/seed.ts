@@ -12,6 +12,7 @@ async function main() {
       create: {
         slug: e.id,
         type: e.type,
+        types: [e.type],
         name: e.name,
         lat: e.lat,
         lng: e.lng,
@@ -41,6 +42,7 @@ async function main() {
       },
       update: {
         type: e.type,
+        types: [e.type],
         name: e.name,
         lat: e.lat,
         lng: e.lng,
