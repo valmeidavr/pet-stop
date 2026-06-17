@@ -143,6 +143,15 @@ model Baba {
   email       String
   bio         String
 
+  cep          String  @default("")
+  logradouro   String  @default("")
+  numero       String  @default("")
+  complemento  String  @default("")
+  bairro       String  @default("")
+  cidade       String  @default("")
+  estado       String  @default("")
+  animalsCared String  @default("")
+
   ownerId String?
   owner   User?   @relation("BabaOwner", fields: [ownerId], references: [id], onDelete: SetNull)
 
