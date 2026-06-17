@@ -1,0 +1,20 @@
+.cep-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.cep-fields__row {
+  display: flex;
+  gap: 0.5rem;
+}
+.cep-fields__row .auth-input {
+  flex: 1;
+}
+.painel__ok {
+  color: #16a34a;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+}

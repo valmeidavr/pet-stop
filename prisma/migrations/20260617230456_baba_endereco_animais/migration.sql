@@ -1,0 +1,9 @@
+-- AlterTable
+ALTER TABLE "Baba" ADD COLUMN     "animalsCared" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "bairro" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "cep" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "cidade" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "complemento" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "estado" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "logradouro" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "numero" TEXT NOT NULL DEFAULT '';

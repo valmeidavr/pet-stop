@@ -9,6 +9,10 @@ export async function getAllBabas() {
   return prisma.baba.findMany({ orderBy: { name: 'asc' } })
 }
 
+export async function getBabaByOwner(ownerId: string) {
+  return prisma.baba.findFirst({ where: { ownerId } })
+}
+
 export async function getBabaBySlug(slug: string): Promise<BabaWithReviews | null> {
   return prisma.baba.findUnique({
     where: { slug },

@@ -30,5 +30,5 @@ export async function register(_prev: RegisterState, formData: FormData): Promis
   })
 
   await signIn('credentials', { email, password, redirect: false })
-  redirect('/')
+  redirect(role === 'CUSTOMER' ? '/' : '/painel')
 }
