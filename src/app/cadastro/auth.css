@@ -169,3 +169,34 @@
 .cep-fields__row .auth-input {
   flex: 1;
 }
+
+.auth-types {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.map-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.map-picker__hint {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+.map-picker__map,
+.map-picker__loading {
+  height: 260px;
+  width: 100%;
+  border-radius: 10px;
+}
+.map-picker__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  color: #6b7280;
+}
