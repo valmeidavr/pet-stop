@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useActionState, useState } from 'react'
 import { register, type RegisterState } from './actions'
 import { passwordStrength, MIN_PASSWORD_SCORE } from '@/lib/password'
+import { CepAddressFields } from '@/components/CepAddressFields'
 import './auth.css'
 
 const ROLE_OPTIONS = [
@@ -21,13 +22,14 @@ export default function CadastroPage() {
   const strength = passwordStrength(password)
   const strongEnough = strength.score >= MIN_PASSWORD_SCORE
   const matches = confirm.length === 0 || confirm === password
+  const isBaba = role === 'BABA'
 
   return (
     <main className="page auth-page">
       <div className="auth-card">
         <h1 className="auth-card__title">Cadastre-se</h1>
         <p className="auth-card__lead">Crie sua conta na Pet Stop</p>
-        <form className="auth-form" action={formAction}>
+        <form className="auth-form" action={formAction} encType="multipart/form-data">
           <fieldset className="auth-roles">
             <legend className="auth-label">Tipo de perfil</legend>
             {ROLE_OPTIONS.map((o) => (
@@ -87,6 +89,32 @@ export default function CadastroPage() {
             />
           </label>
           {!matches && <p className="auth-error" role="alert">As senhas não coincidem</p>}
+
+          {isBaba && (
+            <fieldset className="auth-profile">
+              <legend className="auth-card__lead">Dados do seu perfil de babá</legend>
+
+              <label className="auth-label">
+                Foto
+                <input type="file" name="photo" accept="image/*" className="auth-input" />
+              </label>
+              <label className="auth-label">
+                Telefone
+                <input type="tel" name="phone" className="auth-input" placeholder="(24) 99999-0000" required />
+              </label>
+
+              <CepAddressFields />
+
+              <label className="auth-label">
+                Breve descrição
+                <textarea name="bio" className="auth-input" rows={4} placeholder="Conte um pouco sobre você" required />
+              </label>
+              <label className="auth-label">
+                Quais animais você cuida
+                <textarea name="animalsCared" className="auth-input" rows={4} placeholder="Ex.: cães de pequeno porte, gatos…" required />
+              </label>
+            </fieldset>
+          )}
 
           {state.error && <p className="auth-error" role="alert">{state.error}</p>}
           <button
