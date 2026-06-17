@@ -5,6 +5,7 @@ import { useActionState, useState } from 'react'
 import { register, type RegisterState } from './actions'
 import { passwordStrength, MIN_PASSWORD_SCORE } from '@/lib/password'
 import { CepAddressFields } from '@/components/CepAddressFields'
+import { EstablishmentFields } from '@/components/EstablishmentFields'
 import './auth.css'
 
 const ROLE_OPTIONS = [
@@ -23,6 +24,7 @@ export default function CadastroPage() {
   const strongEnough = strength.score >= MIN_PASSWORD_SCORE
   const matches = confirm.length === 0 || confirm === password
   const isBaba = role === 'BABA'
+  const isEstab = role === 'ESTABLISHMENT_OWNER'
 
   return (
     <main className="page auth-page">
@@ -115,6 +117,8 @@ export default function CadastroPage() {
               </label>
             </fieldset>
           )}
+
+          {isEstab && <EstablishmentFields showName={false} />}
 
           {state.error && <p className="auth-error" role="alert">{state.error}</p>}
           <button
