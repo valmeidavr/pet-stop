@@ -21,10 +21,16 @@ import "./PetMap.css";
 
 type Establishment = EstablishmentWithRelations;
 
+// Turbopack resolves static image imports to a URL string, while webpack
+// resolves them to a StaticImageData object ({ src }). Normalize both shapes.
+function toIconUrl(img: string | { src: string }): string {
+  return typeof img === "string" ? img : img.src
+}
+
 const DefaultIcon = L.icon({
-  iconUrl: markerIcon.src,
-  iconRetinaUrl: markerIcon2x.src,
-  shadowUrl: markerShadow.src,
+  iconUrl: toIconUrl(markerIcon),
+  iconRetinaUrl: toIconUrl(markerIcon2x),
+  shadowUrl: toIconUrl(markerShadow),
   iconSize: [25, 41],
   iconAnchor: [12, 41],
 });
