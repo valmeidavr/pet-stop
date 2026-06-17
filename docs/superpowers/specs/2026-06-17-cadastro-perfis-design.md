@@ -73,8 +73,10 @@ seus próprios dados. Esses perfis passam a aparecer em `/babas` (babá) e
 ## Fluxo de cadastro (`/cadastro`)
 
 1. Adiciona escolha de perfil (3 opções: babá / estabelecimento / usuário comum).
-2. `register()` cria o `User` com `role` correspondente (hoje força CUSTOMER).
-3. Após cadastro + login automático: comum → `/`; babá/estabelecimento →
+2. Campo de **confirmação de senha** + **medidor de força** ao vivo, com **nível
+   mínimo obrigatório** (score >= 3, "forte") para habilitar o cadastro.
+3. `register()` cria o `User` com `role` correspondente (hoje força CUSTOMER).
+4. Após cadastro + login automático: comum → `/`; babá/estabelecimento →
    redireciona para o editor de perfil correspondente.
 
 ## Área logada (painel)
