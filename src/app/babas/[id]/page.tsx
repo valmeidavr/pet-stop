@@ -44,6 +44,13 @@ export default async function BabaProfilePage({
         <p className="baba-profile__bio">{baba.bio}</p>
       </section>
 
+      {baba.animalsCared && (
+        <section className="baba-profile__section">
+          <h2 className="baba-profile__section-title">Animais que cuida</h2>
+          <p className="baba-profile__bio">{baba.animalsCared}</p>
+        </section>
+      )}
+
       <section className="baba-profile__section">
         <h2 className="baba-profile__section-title">Avaliações</h2>
         <ul className="baba-reviews">
