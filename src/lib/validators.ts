@@ -26,5 +26,22 @@ export const loginSchema = z.object({
   password: z.string().min(8),
 })
 
+export const babaProfileSchema = z.object({
+  name: z.string().min(1, 'Nome obrigatório').max(100),
+  phone: z.string().min(8, 'Telefone obrigatório'),
+  email: z.email('Email inválido'),
+  bio: z.string().min(1, 'Descrição obrigatória').max(1000),
+  animalsCared: z.string().min(1, 'Informe quais animais você cuida').max(2000),
+  cep: z.string().min(1, 'CEP obrigatório'),
+  logradouro: z.string().min(1, 'Logradouro obrigatório'),
+  numero: z.string().min(1, 'Número obrigatório'),
+  complemento: z.string().optional().default(''),
+  bairro: z.string().min(1, 'Bairro obrigatório'),
+  cidade: z.string().min(1, 'Cidade obrigatória'),
+  estado: z.string().min(2, 'Estado obrigatório').max(2),
+  photo: z.string().optional().default(''),
+})
+
 export type RegisterInput = z.infer<typeof registerSchema>
 export type LoginInput = z.infer<typeof loginSchema>
+export type BabaProfileInput = z.infer<typeof babaProfileSchema>

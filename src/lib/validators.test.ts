@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { registerSchema, loginSchema } from './validators'
+import { registerSchema, loginSchema, babaProfileSchema } from './validators'
 
 describe('registerSchema', () => {
   const base = {
@@ -73,5 +73,33 @@ describe('loginSchema', () => {
   it('rejeita senha curta', () => {
     const r = loginSchema.safeParse({ email: 'a@b.com', password: '1' })
     expect(r.success).toBe(false)
+  })
+})
+
+describe('babaProfileSchema', () => {
+  const base = {
+    name: 'Ana',
+    phone: '24999990000',
+    email: 'ana@b.com',
+    bio: 'Cuido de pets há 10 anos.',
+    animalsCared: 'Cães de pequeno porte e gatos.',
+    cep: '27330000',
+    logradouro: 'Rua A',
+    numero: '100',
+    complemento: '',
+    bairro: 'Centro',
+    cidade: 'Barra Mansa',
+    estado: 'RJ',
+    photo: '',
+  }
+
+  it('aceita perfil válido', () => {
+    expect(babaProfileSchema.safeParse(base).success).toBe(true)
+  })
+  it('rejeita sem animais cuidados', () => {
+    expect(babaProfileSchema.safeParse({ ...base, animalsCared: '' }).success).toBe(false)
+  })
+  it('rejeita sem cidade', () => {
+    expect(babaProfileSchema.safeParse({ ...base, cidade: '' }).success).toBe(false)
   })
 })
