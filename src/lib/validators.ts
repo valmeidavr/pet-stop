@@ -42,6 +42,28 @@ export const babaProfileSchema = z.object({
   photo: z.string().optional().default(''),
 })
 
+export const establishmentTypeValues = ['loja', 'clinica', 'farmacia', 'hospital', 'banho_tosa'] as const
+
+export const establishmentProfileSchema = z.object({
+  name: z.string().min(1, 'Nome obrigatório').max(120),
+  phone: z.string().min(8, 'Telefone obrigatório'),
+  email: z.email('Email inválido'),
+  openingHours: z.string().min(1, 'Horário obrigatório').max(500),
+  cep: z.string().min(1, 'CEP obrigatório'),
+  logradouro: z.string().min(1, 'Logradouro obrigatório'),
+  numero: z.string().min(1, 'Número obrigatório'),
+  complemento: z.string().optional().default(''),
+  bairro: z.string().min(1, 'Bairro obrigatório'),
+  cidade: z.string().min(1, 'Cidade obrigatória'),
+  estado: z.string().min(2, 'Estado obrigatório').max(2),
+  types: z.array(z.enum(establishmentTypeValues)).min(1, 'Selecione ao menos um tipo'),
+  services: z.array(z.string()).default([]),
+  lat: z.coerce.number().optional(),
+  lng: z.coerce.number().optional(),
+  photo: z.string().optional().default(''),
+})
+
 export type RegisterInput = z.infer<typeof registerSchema>
 export type LoginInput = z.infer<typeof loginSchema>
 export type BabaProfileInput = z.infer<typeof babaProfileSchema>
+export type EstablishmentProfileInput = z.infer<typeof establishmentProfileSchema>
