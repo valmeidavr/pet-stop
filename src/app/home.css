@@ -1,8 +1,7 @@
-.hero { 
-  margin-top: var(--navbar-height);
+.hero {
+  padding-top: var(--navbar-height);
   margin-bottom: 0;
-  padding-top: 0;
-  background: var(--white);
+  background: linear-gradient(180deg, #fff7ed 0%, #fffdf9 45%, var(--white) 100%);
 }
 
 .hero__banner {
@@ -44,6 +43,17 @@
   justify-content: center;
   padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 3vw, 2.75rem);
   overflow: hidden;
+}
+
+/* Brilho de cor da marca atrás do texto (profundidade) */
+.hero__panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(440px 340px at 20% 26%, rgba(249, 115, 22, 0.14), transparent 70%),
+    radial-gradient(440px 340px at 82% 80%, rgba(22, 163, 74, 0.13), transparent 70%);
+  pointer-events: none;
 }
 
 .hero__panel-bg {
@@ -96,19 +106,25 @@
 
 .hero__actions {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 0.85rem;
-  max-width: 280px;
   margin: 0 auto;
 }
 
 .hero__cta {
-  width: 100%;
-  border-radius: 10px;
-  padding: 0.72rem 1.35rem;
+  border-radius: 12px;
+  padding: 0.85rem 1.9rem;
   font-weight: 800;
-  font-size: 1rem;
+  font-size: 1.05rem;
+  min-width: 168px;
+}
+
+@media (max-width: 380px) {
+  .hero__cta {
+    width: 100%;
+  }
 }
 
 .services-intro {
